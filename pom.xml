@@ -12,6 +12,7 @@
         <module>dubbo-demo-misc-provider</module>
         <module>dubbo-demo-misc-consumer</module>
         <module>dubbo-demo-misc-common</module>
+        <module>dubbo-demo-misc-monitor</module>
     </modules>
 
     <properties>
