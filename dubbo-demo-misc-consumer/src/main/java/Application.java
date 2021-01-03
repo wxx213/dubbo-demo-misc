@@ -16,18 +16,20 @@
  */
 package org.apache.dubbo.demo.misc.consumer;
 
+import org.apache.dubbo.config.ApplicationConfig;
+import org.apache.dubbo.config.ReferenceConfig;
+import org.apache.dubbo.config.RegistryConfig;
+import org.apache.dubbo.config.bootstrap.DubboBootstrap;
+import org.apache.dubbo.config.utils.ReferenceConfigCache;
 import org.apache.dubbo.demo.misc.DemoService;
 
+import org.apache.dubbo.rpc.service.GenericService;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 import java.util.concurrent.CompletableFuture;
 
 public class Application {
-    /**
-     * In order to make sure multicast registry works, need to specify '-Djava.net.preferIPv4Stack=true' before
-     * launch the application
-     */
-    public static void main(String[] args) throws Exception {
+    public static void startWithXmlContext() {
         ClassPathXmlApplicationContext context = new ClassPathXmlApplicationContext("dubbo-consumer.xml");
         context.start();
         DemoService demoService = context.getBean("demoService", DemoService.class);
@@ -35,5 +37,59 @@ public class Application {
         // System.out.println("result: " + hello.get());
         String hello = demoService.sayHello("world");
         System.out.println("result: " + hello);
+    }
+
+    private static boolean isClassic(String[] args) {
+        return args.length > 0 && "classic".equalsIgnoreCase(args[0]);
+    }
+
+    private static void runWithBootstrap() {
+        System.out.println("dubbo comsumer starting with bootstrap");
+        ReferenceConfig<DemoService> reference = new ReferenceConfig<>();
+        reference.setInterface(DemoService.class);
+        reference.setGeneric("true");
+
+        DubboBootstrap bootstrap = DubboBootstrap.getInstance();
+        bootstrap.application(new ApplicationConfig("demo-consumer"))
+                .registry(new RegistryConfig("zookeeper://192.168.2.101:2181"))
+                .reference(reference)
+                .start();
+
+        DemoService demoService = ReferenceConfigCache.getCache().get(reference);
+        String message = demoService.sayHello("dubbo");
+        System.out.println(message);
+
+        // generic invoke
+        GenericService genericService = (GenericService) demoService;
+        Object genericInvokeResult = genericService.$invoke("sayHello", new String[] { String.class.getName() },
+                new Object[] { "dubbo generic invoke" });
+        System.out.println(genericInvokeResult);
+    }
+
+    private static void runWithRefer() {
+        System.out.println("dubbo comsumer starting with refer");
+        ReferenceConfig<DemoService> reference = new ReferenceConfig<>();
+        reference.setApplication(new ApplicationConfig("demo-consumer"));
+        reference.setRegistry(new RegistryConfig("zookeeper://192.168.2.101:2181"));
+        reference.setInterface(DemoService.class);
+        DemoService service = reference.get();
+        String message = service.sayHello("dubbo");
+        System.out.println(message);
+    }
+
+    public static void startWithApiContext(String[] args) {
+        if (isClassic(args)) {
+            runWithRefer();
+        } else {
+            runWithBootstrap();
+        }
+    }
+    /**
+     * In order to make sure multicast registry works, need to specify '-Djava.net.preferIPv4Stack=true' before
+     * launch the application
+     */
+    public static void main(String[] args) throws Exception {
+        startWithXmlContext();
+        // startWithApiContext(args);
     }
 }
