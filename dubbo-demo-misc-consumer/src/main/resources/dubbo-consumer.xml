@@ -28,4 +28,5 @@
 
     <dubbo:reference id="demoService" check="false" interface="org.apache.dubbo.demo.misc.DemoService"/>
 
+    <dubbo:monitor protocol="registry"></dubbo:monitor>
 </beans>

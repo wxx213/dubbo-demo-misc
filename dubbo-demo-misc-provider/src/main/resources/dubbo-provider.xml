@@ -33,4 +33,5 @@
 
     <dubbo:service interface="org.apache.dubbo.demo.misc.DemoService" ref="demoService"/>
 
+    <dubbo:monitor protocol="registry"></dubbo:monitor>
 </beans>

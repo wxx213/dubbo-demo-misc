@@ -57,6 +57,11 @@
             <artifactId>dubbo-registry-multicast</artifactId>
             <version>${use_dubbo_version}</version>
         </dependency>
+        <dependency>
+            <groupId>org.apache.dubbo</groupId>
+            <artifactId>dubbo-monitor-default</artifactId>
+            <version>${use_dubbo_version}</version>
+        </dependency>
     </dependencies>
 
     <build>
