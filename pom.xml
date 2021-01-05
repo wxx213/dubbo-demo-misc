@@ -7,7 +7,7 @@
     <groupId>org.example</groupId>
     <artifactId>dubbo-demo-misc</artifactId>
     <packaging>pom</packaging>
-    <version>1.0-SNAPSHOT</version>
+    <version>${revision}</version>
     <modules>
         <module>dubbo-demo-misc-provider</module>
         <module>dubbo-demo-misc-consumer</module>
@@ -16,7 +16,8 @@
     </modules>
 
     <properties>
-        <use_dubbo_version>2.7.8</use_dubbo_version>
+        <use_dubbo_version>2.7.8-SNAPSHOT</use_dubbo_version>
+        <revision>1.0-SNAPSHOT</revision>
     </properties>
     <build>
         <plugins>
