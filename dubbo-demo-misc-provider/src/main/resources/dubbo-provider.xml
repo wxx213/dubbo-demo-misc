@@ -22,7 +22,7 @@
        http://dubbo.apache.org/schema/dubbo http://dubbo.apache.org/schema/dubbo/dubbo.xsd">
 
     <dubbo:application metadata-type="remote" name="demo-provider">
-        <dubbo:parameter key="qos.port" value="22222"/>
+        <dubbo:parameter key="qos.port" value="22225"/>
     </dubbo:application>
 
     <!--dubbo:metadata-report address="zookeeper://127.0.0.1:2181"/-->
