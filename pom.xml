@@ -16,7 +16,7 @@
     </modules>
 
     <properties>
-        <use_dubbo_version>2.7.8-SNAPSHOT</use_dubbo_version>
+        <use_dubbo_version>2.7.8-dev</use_dubbo_version>
         <revision>1.0-SNAPSHOT</revision>
     </properties>
     <build>
