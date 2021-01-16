@@ -16,6 +16,7 @@
  */
 package org.apache.dubbo.demo.misc.consumer;
 
+import com.sun.net.httpserver.HttpServer;
 import org.apache.dubbo.config.ApplicationConfig;
 import org.apache.dubbo.config.ReferenceConfig;
 import org.apache.dubbo.config.RegistryConfig;
@@ -26,6 +27,8 @@ import org.apache.dubbo.demo.misc.DemoService;
 import org.apache.dubbo.rpc.service.GenericService;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
+import java.io.IOException;
+import java.net.InetSocketAddress;
 import java.util.concurrent.CompletableFuture;
 
 public class Application {
@@ -84,12 +87,24 @@ public class Application {
             runWithBootstrap();
         }
     }
+    public static void startWithXmlContextHttpServer() {
+        // //监听8087端口，第二个参数小于等于0使用默认值，表示可同时接受请求的个数
+        HttpServer server = null;
+        try {
+            server = HttpServer.create(new InetSocketAddress(8087), 0);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        server.createContext("/test", new TestHandler());
+        server.start();
+    }
     /**
      * In order to make sure multicast registry works, need to specify '-Djava.net.preferIPv4Stack=true' before
      * launch the application
      */
     public static void main(String[] args) throws Exception {
-        startWithXmlContext();
+        //startWithXmlContext();
         // startWithApiContext(args);
+        startWithXmlContextHttpServer();
     }
 }
