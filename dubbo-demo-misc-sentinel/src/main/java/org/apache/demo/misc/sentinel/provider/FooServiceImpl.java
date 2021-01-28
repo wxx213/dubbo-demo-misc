@@ -17,9 +17,9 @@
 
 package org.apache.demo.misc.sentinel.provider;
 
-import org.apache.dubbo.config.annotation.Service;
-
 import org.apache.demo.misc.sentinel.FooService;
+import org.apache.dubbo.config.annotation.Service;
+import org.apache.dubbo.rpc.RpcContext;
 
 import java.time.LocalDateTime;
 
@@ -28,7 +28,7 @@ public class FooServiceImpl implements FooService {
 
     @Override
     public String sayHello(String name) {
-        return String.format("Hello, %s at %s", name, LocalDateTime.now());
+        return String.format("Hello, %s at %s, from %s", name, LocalDateTime.now(), RpcContext.getContext().getRemoteAddress());
     }
 
     @Override

@@ -31,7 +31,7 @@ import org.springframework.context.annotation.Configuration;
 @Configuration
 @EnableDubbo
 public class ProviderConfiguration {
-    @Value("zookeeper://${zookeeper.address:127.0.0.1}:2181")
+    @Value("zookeeper://${zookeeper.address:192.168.2.101}:2181")
     private String zookeeperAddress;
 
     @Value("${dubbo.port:20880}")
