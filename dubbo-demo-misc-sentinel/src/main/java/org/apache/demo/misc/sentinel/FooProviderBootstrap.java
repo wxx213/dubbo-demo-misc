@@ -44,7 +44,7 @@ public class FooProviderBootstrap {
         // Only for eager initialization.
         InitExecutor.doInit();
 
-        initFlowRule();
+        // initFlowRule();
 
         AnnotationConfigApplicationContext context = new AnnotationConfigApplicationContext();
         context.register(ProviderConfiguration.class);

@@ -18,10 +18,7 @@
 
 package org.apache.demo.misc.sentinel;
 
-import com.alibaba.csp.sentinel.slots.block.SentinelRpcException;
-import org.apache.demo.misc.sentinel.consumer.ConsumerConfiguration;
-import org.apache.demo.misc.sentinel.consumer.FooServiceConsumer;
-import org.springframework.context.annotation.AnnotationConfigApplicationContext;
+import org.apache.demo.misc.sentinel.consumer.ConsumerFlowRuleTest;
 
 /**
  * Please add the following VM arguments:
@@ -33,21 +30,7 @@ import org.springframework.context.annotation.AnnotationConfigApplicationContext
 public class FooConsumerBootstrap {
 
     public static void startConsumer(String[] args) {
-        AnnotationConfigApplicationContext consumerContext = new AnnotationConfigApplicationContext();
-        consumerContext.register(ConsumerConfiguration.class);
-        consumerContext.refresh();
-
-        FooServiceConsumer service = consumerContext.getBean(FooServiceConsumer.class);
-
-        for (int i = 0; i < 15; i++) {
-            try {
-                String message = service.sayHello("dubbo");
-                System.out.println("Success: " + message);
-            } catch (SentinelRpcException ex) {
-                System.out.println("Blocked");
-            } catch (Exception ex) {
-                ex.printStackTrace();
-            }
-        }
+        ConsumerFlowRuleTest.TestFlowRule(args);
     }
+
 }
