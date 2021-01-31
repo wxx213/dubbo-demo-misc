@@ -18,6 +18,7 @@
 
 package org.apache.demo.misc.sentinel;
 
+import org.apache.demo.misc.sentinel.consumer.CircuitBreakerTest;
 import org.apache.demo.misc.sentinel.consumer.ConsumerFlowRuleTest;
 
 /**
@@ -30,7 +31,8 @@ import org.apache.demo.misc.sentinel.consumer.ConsumerFlowRuleTest;
 public class FooConsumerBootstrap {
 
     public static void startConsumer(String[] args) {
-        ConsumerFlowRuleTest.TestFlowRule(args);
+        // ConsumerFlowRuleTest.TestFlowRule(args);
+        CircuitBreakerTest.TestCircuitBreake(args);
     }
 
 }
