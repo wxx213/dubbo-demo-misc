@@ -14,6 +14,7 @@
         <module>dubbo-demo-misc-common</module>
         <module>dubbo-demo-misc-monitor</module>
         <module>dubbo-demo-misc-sentinel</module>
+        <module>dubbo-demo-misc-seata</module>
     </modules>
 
     <properties>
