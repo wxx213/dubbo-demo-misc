@@ -21,6 +21,8 @@ import org.apache.demo.misc.sentinel.FooService;
 import org.apache.dubbo.config.annotation.Service;
 import org.apache.dubbo.rpc.RpcContext;
 
+import java.net.InetAddress;
+import java.net.UnknownHostException;
 import java.time.LocalDateTime;
 
 @Service
@@ -28,7 +30,13 @@ public class FooServiceImpl implements FooService {
 
     @Override
     public String sayHello(String name) {
-        return String.format("Hello, %s at %s, from %s", name, LocalDateTime.now(), RpcContext.getContext().getRemoteAddress());
+        String ip = "null";
+        try {
+            ip = InetAddress.getLocalHost().getHostAddress();
+        } catch (UnknownHostException e) {
+            e.printStackTrace();
+        }
+        return String.format("Hello, %s at %s, from %s", name, LocalDateTime.now(), ip);
     }
 
     @Override
