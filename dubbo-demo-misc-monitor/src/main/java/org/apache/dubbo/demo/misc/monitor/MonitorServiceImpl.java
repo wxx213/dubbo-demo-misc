@@ -1,5 +1,7 @@
 package org.apache.dubbo.demo.misc.monitor;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 
 import org.apache.dubbo.monitor.MonitorService;
@@ -27,9 +29,13 @@ public class MonitorServiceImpl implements MonitorService {
             String maxOutput = statistics.getParameter(MonitorService.MAX_OUTPUT);
             String maxElapsed = statistics.getParameter(MonitorService.MAX_ELAPSED);
             String maxConcurrent = statistics.getParameter(MonitorService.MAX_CONCURRENT);
+            String sd = "";
+            Date d = new Date();
+            SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+            sd = sdf.format(new Date(Long.parseLong(timestamp))); // 时间戳转换日期
             System.out.println("application:"+application
                     +",service:"+service+",method:"+method+",group:"+group+",version:"+version+",client:"+client+",server:"+server
-                    +",timestamp:"+timestamp+",success:"+success+",failure:"+failure+",input:"+input+",output:"+output
+                    +",time:"+sd+",success:"+success+",failure:"+failure+",input:"+input+",output:"+output
                     +",elapsed:"+elapsed+",concurrent:"+concurrent+",maxInput:"+maxInput+",maxOutput:"+maxOutput+",maxElapsed:"+maxElapsed
                     +",maxConcurrent:"+maxConcurrent
             );

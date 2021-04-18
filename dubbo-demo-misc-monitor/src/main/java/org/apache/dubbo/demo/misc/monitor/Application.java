@@ -18,10 +18,13 @@ package org.apache.dubbo.demo.misc.monitor;
 
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
+import java.util.concurrent.CountDownLatch;
+
 public class Application {
     public static void main(String[] args) throws Exception {
         ClassPathXmlApplicationContext context = new ClassPathXmlApplicationContext("dubbo-monitor.xml");
         context.start();
-        System.in.read();
+        // System.in.read();
+        new CountDownLatch(1).await();
     }
 }
