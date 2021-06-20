@@ -12,14 +12,16 @@
         <module>dubbo-demo-misc-provider</module>
         <module>dubbo-demo-misc-consumer</module>
         <module>dubbo-demo-misc-common</module>
+        <!--
         <module>dubbo-demo-misc-monitor</module>
         <module>dubbo-demo-misc-sentinel</module>
         <module>dubbo-demo-misc-seata</module>
         <module>dubbo-demo-misc-test</module>
+        -->
     </modules>
 
     <properties>
-        <use_dubbo_version>2.7.8-dev</use_dubbo_version>
+        <use_dubbo_version>3.0.0</use_dubbo_version>
         <revision>1.0-SNAPSHOT</revision>
     </properties>
     <build>

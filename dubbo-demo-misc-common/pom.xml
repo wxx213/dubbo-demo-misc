@@ -15,7 +15,7 @@
     <dependencies>
         <dependency>
             <groupId>org.apache.dubbo</groupId>
-            <artifactId>dubbo-rpc-dubbo</artifactId>
+            <artifactId>dubbo-rpc-rest</artifactId>
             <version>${use_dubbo_version}</version>
         </dependency>
     </dependencies>

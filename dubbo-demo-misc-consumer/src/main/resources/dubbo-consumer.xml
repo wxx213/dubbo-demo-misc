@@ -22,13 +22,19 @@
        http://dubbo.apache.org/schema/dubbo http://dubbo.apache.org/schema/dubbo/dubbo.xsd">
 
     <dubbo:application name="demo-consumer">
-        <dubbo:parameter key="qos.port" value="22224"/>
     </dubbo:application>
 
-    <!--dubbo:registry address="zookeeper://127.0.0.1:2181"/-->
-    <dubbo:registry address="zookeeper://192.168.2.101:2181"/>
+    <dubbo:metadata-report address="zookeeper://127.0.0.1:2181"/>
 
-    <dubbo:reference id="demoService" check="false" interface="org.apache.dubbo.demo.misc.DemoService"/>
+    <dubbo:registry address="zookeeper://127.0.0.1:2181"/>
 
-    <dubbo:monitor protocol="registry"></dubbo:monitor>
+    <dubbo:reference id="demoService" check="false"
+                     interface="org.apache.dubbo.demo.misc.DemoService"/>
+
+    <dubbo:reference version="1.0.0" group="greeting" id="greetingService" check="false"
+                     interface="org.apache.dubbo.demo.misc.GreetingService"/>
+
+    <dubbo:reference protocol="rest" version="1.0.0" id="restDemoService" check="false"
+                     interface="org.apache.dubbo.demo.misc.RestDemoService"/>
+
 </beans>
