@@ -21,18 +21,17 @@
        xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-4.3.xsd
        http://dubbo.apache.org/schema/dubbo http://dubbo.apache.org/schema/dubbo/dubbo.xsd">
 
-    <dubbo:application metadata-type="remote" name="demo-monitor">
-        <dubbo:parameter key="qos.port" value="22223"/>
+    <dubbo:application name="demo-monitor">
     </dubbo:application>
 
+    <dubbo:config-center address="zookeeper://127.0.0.1:2181"/>
     <!--dubbo:metadata-report address="zookeeper://127.0.0.1:2181"/-->
     <dubbo:metadata-report address="zookeeper://192.168.2.101:2181"/>
+    <dubbo:registry id="registry1" address="zookeeper://127.0.0.1:2181?registry-type=service"/>
+    <dubbo:protocol name="dubbo" port="-1"/>
 
-    <!--dubbo:registry address="zookeeper://127.0.0.1:2181"/-->
-    <dubbo:registry address="zookeeper://192.168.2.101:2181"/>
-
-    <dubbo:protocol name="dubbo" port="20883"/>
     <bean id="monitorService" class="org.apache.dubbo.demo.misc.monitor.MonitorServiceImpl"/>
 
-    <dubbo:service interface="org.apache.dubbo.monitor.MonitorService" ref="monitorService"/>
+    <dubbo:service delay="5000" interface="org.apache.dubbo.monitor.MonitorService"
+                   timeout="3000" ref="monitorService" registry="registry1" protocol="dubbo"/>
 </beans>

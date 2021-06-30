@@ -41,4 +41,6 @@
     <dubbo:service delay="5000" version="1.0.0" timeout="5000" interface="org.apache.dubbo.demo.misc.RestDemoService"
                    ref="restDemoService" protocol="rest"/>
 
+    <dubbo:monitor protocol="registry"></dubbo:monitor>
+
 </beans>
