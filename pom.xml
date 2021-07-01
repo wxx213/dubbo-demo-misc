@@ -13,11 +13,9 @@
         <module>dubbo-demo-misc-consumer</module>
         <module>dubbo-demo-misc-common</module>
         <module>dubbo-demo-misc-monitor</module>
-        <!--
         <module>dubbo-demo-misc-sentinel</module>
         <module>dubbo-demo-misc-seata</module>
         <module>dubbo-demo-misc-test</module>
-        -->
     </modules>
 
     <properties>
